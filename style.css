@@ -1,0 +1,10 @@
+.timer {
+  width: 30%;
+  display: flex;
+  font-size: 24px;
+  justify-content: space-between;
+}
+.value {
+  color: blue;
+  font-size: 36px;
+}

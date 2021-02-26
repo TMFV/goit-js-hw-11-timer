@@ -48,7 +48,6 @@ class CountdownTimer {
 
         const startTimeRef = new Date();
         let difStartTime = deltaTime(targetDateForTimer, startTimeRef);
-
         timeCalc(difStartTime, this.refs);
 
         const timerRef = setInterval(() => {

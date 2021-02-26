@@ -6,10 +6,7 @@ class CountdownTimer {
         this.selector = selector;
         this.targerDate = targetDate;
         const targetDateForTimer = new Date(targetDate);
-        //console.log(targetDateForTimer);
         let unixTargetTime = targetDateForTimer.getTime();
-        //console.log(unixTargetTime);
-
         this.template = `<div class="field">
             <span class="value" data-value="days">11</span>
             <span class="label">Days</span>
@@ -29,7 +26,6 @@ class CountdownTimer {
             <span class="value" data-value="secs">11</span>
             <span class="label">Seconds</span>
         </div>`;
-        //console.dir(targetDate);
         
         this.root = document.querySelector(this.selector);
         this.root.insertAdjacentHTML('beforeend', this.template);
@@ -40,7 +36,6 @@ class CountdownTimer {
             seconds: this.root.querySelector("span[data-value='secs']")
         };
         
-        //
         function timeCalc(currentTime, refs) {
             refs.days.textContent = Math.floor(currentTime / (1000 * 60 * 60 * 24));
             refs.hours.textContent = Math.floor( currentTime % (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
@@ -51,46 +46,24 @@ class CountdownTimer {
             return targetDate - nowTime;
         };
 
-        //
         const startTimeRef = new Date();
         let difStartTime = deltaTime(targetDateForTimer, startTimeRef);
 
         timeCalc(difStartTime, this.refs);
 
-        /*this.refs.days.textContent = Math.floor(difStartTime / (1000 * 60 * 60 * 24));
-        this.refs.hours.textContent = Math.floor( difStartTime % (1000 * 60 * 60 * 24) / (1000 * 60 * 60));
-        this.refs.minutes.textContent = Math.floor(difStartTime % (1000 * 60 * 60) / (1000 * 60));
-        this.refs.seconds.textContent = Math.floor(difStartTime % (1000 * 60) / 1000);
-        */
-        
         const timerRef = setInterval(() => {
             if (unixTargetTime > 0) {
                 const date = new Date();
                 let nowTimeRef = date.getTime()
-                //console.log(nowTimeRef);
-
                 let difTimeNow = deltaTime(unixTargetTime, nowTimeRef);
                 timeCalc(difTimeNow, this.refs);
-                /*const days = Math.floor(difTimeNow / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((difTimeNow % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const mins = Math.floor((difTimeNow % (1000 * 60 * 60)) / (1000 * 60));
-                const secs = Math.floor((difTimeNow % (1000 * 60)) / 1000);
-                */
-                /*
-                this.refs.days.textContent = days;
-                this.refs.hours.textContent = hours;
-                this.refs.minutes.textContent = mins;
-                this.refs.seconds.textContent = secs;
-                */
-                
-                //
             } else {
                 console.log('Відлік завершено або дата задана в минулому!!!');
                 clearInterval(timerRef);
             }
         }, 1000);
     }
-}
+};
 
 
 const timer = new CountdownTimer({
